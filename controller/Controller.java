@@ -1,10 +1,11 @@
 package controller;
 
 import javafx.application.Application;
-import javafx.scene.Scene;
 import javafx.scene.image.Image;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import view.PaintingPane;
+import view.PaintingScene;
+import view.RootPane;
 
 public class Controller extends Application {
     public static void startup(String[] args) {
@@ -13,16 +14,16 @@ public class Controller extends Application {
 
     @Override
     public void start(Stage stage) {
-        Scene scene = new Scene(new Pane()); // TODO paintingscene
-
+        // stage settings
         stage = new Stage();
-        stage.setTitle("Pepijn Emmers - Paining");
+        stage.setTitle("Pepijn Emmers - Painting");
         stage.getIcons().add(new Image("/resources/pics/favicon.jpg"));
-        stage.setHeight(600);
         stage.setWidth(800);
+        stage.setHeight(600);
         stage.setResizable(false); // TODO resizable
 
-        stage.setScene(scene);
+        // show stage
+        stage.setScene(new PaintingScene(new RootPane()));
         stage.show();
     }
 }
