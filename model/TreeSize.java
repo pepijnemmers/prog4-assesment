@@ -10,12 +10,18 @@ public enum TreeSize {
     XXL("#014a01");
 
     private final Color color;
+    private final double scale;
 
-    TreeSize(String hex) {
+    TreeSize(String hex, double scale) {
         color = Color.web(hex);
+        this.scale = scale;
     }
 
     public Color getColor() {
         return color;
+    }
+
+    public double getScale() {
+        return scale;
     }
 }
