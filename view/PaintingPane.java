@@ -2,10 +2,14 @@ package view;
 
 import controller.Controller;
 import javafx.application.Platform;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import model.Tree;
 import model.TreeSize;
 import model.TreeType;
@@ -13,6 +17,7 @@ import model.World;
 
 public class PaintingPane extends StackPane {
     private World world;
+    private final Text autograph;
 
     public PaintingPane(Controller controller) {
         // draw background
@@ -29,7 +34,16 @@ public class PaintingPane extends StackPane {
 
         Pane content = new Pane();
 
-        getChildren().addAll(background, content); // background, content, signature TODO
+        // autograph
+        autograph = new Text("Pepijn Emmers");
+        controller.changeAutographFont("GreatVibes");
+
+        HBox autographPane = new HBox();
+        autographPane.setAlignment(Pos.BOTTOM_RIGHT);
+        autographPane.setPadding(new Insets(15));
+        autographPane.getChildren().add(autograph);
+
+        getChildren().addAll(background, content, autographPane);
 
         World world = new World();
         world.addTree(new Tree(TreeSize.XXL, TreeType.LEAF, 30, 75));
@@ -43,6 +57,11 @@ public class PaintingPane extends StackPane {
                 content.getChildren().add(painter.paint(tree, getWidth(), getHeight()));
             }
         });
+    }
 
+    public void changeAutographFont(Font font) {
+        getChildren().remove(autograph);
+        autograph.setFont(font);
+        getChildren().add(autograph);
     }
 }

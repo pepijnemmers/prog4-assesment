@@ -8,6 +8,7 @@ import javafx.scene.layout.Pane;
 
 public class PaintingScene extends Scene {
     private final Controller controller;
+    public final PaintingPane paintingPane;
 
     public PaintingScene(Controller controller) {
         super(new Pane());
@@ -15,7 +16,7 @@ public class PaintingScene extends Scene {
 
         BorderPane root = new BorderPane();
         MenuBar menuBar = createMenuBar();
-        PaintingPane paintingPane = new PaintingPane(controller);
+        paintingPane = new PaintingPane(controller);
         root.setTop(menuBar);
         root.setCenter(paintingPane);
 
