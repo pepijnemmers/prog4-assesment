@@ -9,6 +9,10 @@ public class World {
         trees = new ArrayList<Tree>();
     }
 
+    public ArrayList<Tree> getTrees() {
+        return trees;
+    }
+
     public void addTree(Tree tree) {
         trees.add(tree);
     }

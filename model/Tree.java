@@ -13,6 +13,22 @@ public class Tree {
         this.relY = relY;
     }
 
+    public TreeSize getSize() {
+        return size;
+    }
+
+    public TreeType getType() {
+        return type;
+    }
+
+    public double getRelX() {
+        return relX;
+    }
+
+    public double getRelY() {
+        return relY;
+    }
+
     public void move() {
 
     }
