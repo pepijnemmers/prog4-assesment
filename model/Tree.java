@@ -4,7 +4,7 @@ public class Tree {
     private final TreeSize size;
     private final TreeType type;
     private double relX;
-    private final double relY;
+    private double relY;
 
     public Tree(TreeSize size, TreeType type, double relX, double relY) {
         this.size = size;
@@ -31,5 +31,10 @@ public class Tree {
 
     public void move(double x) {
         relX = x;
+    }
+
+    public void move(double x, double y) {
+        relX = x;
+        relY = y;
     }
 }

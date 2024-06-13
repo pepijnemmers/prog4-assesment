@@ -8,10 +8,16 @@ import javafx.scene.shape.StrokeType;
 import model.Tree;
 
 abstract class TreePainter {
-    protected final static int STROKE_WIDTH = 2;
+    protected static final int STROKE_WIDTH = 2;
     private static final double TRUNK_WIDTH = 25;
 
-    public Pane paint(Tree tree, double paintingWidth, double paintingHeight) {
+    private PaintingPane paintingPane = null;
+
+    public Pane paint(Tree tree, PaintingPane paintingPane) {
+        this.paintingPane = paintingPane;
+        double paintingWidth = paintingPane.getWidth();
+        double paintingHeight = paintingPane.getHeight();
+
         // calculate the position
         double x = tree.getRelX() / 100 * paintingWidth;
         double y = tree.getRelY() / 100 * paintingHeight;
@@ -46,9 +52,44 @@ abstract class TreePainter {
         paneWithTree.setLayoutX(x - (width * (scale + 1) / 2));
         paneWithTree.setLayoutY(y - (height * (scale + 1) / 2));
 
+        // drag and drop
+        setDragAndDrop(paneWithTree, tree, paintingWidth, paintingHeight);
+
         // return the tree
         return paneWithTree;
     }
 
     protected abstract Shape drawTreeTop(Tree tree);
+
+    private void setDragAndDrop(Pane paneWithTree, Tree tree, double paintingWidth, double paintingHeight) {
+        // create variables to store the offset
+        final double[] offsetX = new double[1];
+        final double[] offsetY = new double[1];
+
+        // set the offset when the mouse is pressed (offset = mouse position - tree position)
+        paneWithTree.setOnMousePressed(event -> {
+            offsetX[0] = event.getSceneX() - paneWithTree.getLayoutX();
+            offsetY[0] = event.getSceneY() - paneWithTree.getLayoutY();
+        });
+
+        // move the tree when the mouse is dragged
+        paneWithTree.setOnMouseDragged(event -> {
+            double newX = event.getSceneX() - offsetX[0];
+            double newY = event.getSceneY() - offsetY[0];
+            paneWithTree.setLayoutX(newX);
+            paneWithTree.setLayoutY(newY);
+        });
+
+        // move the tree (in the model) when the mouse is released
+        paneWithTree.setOnMouseReleased(event -> {
+            double newX = paneWithTree.getLayoutX() + paneWithTree.getBoundsInParent().getWidth() / 2;
+            double newY = paneWithTree.getLayoutY() + paneWithTree.getBoundsInParent().getHeight() / 2;
+            double relX = newX / paintingWidth * 100;
+            double relY = newY / paintingHeight * 100;
+            if (relY < 50) relY = 50;
+
+            tree.move(relX, relY);
+            paintingPane.refresh();
+        });
+    }
 }

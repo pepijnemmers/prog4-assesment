@@ -4,6 +4,7 @@ import controller.Controller;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.input.TransferMode;
 import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import model.Tree;
@@ -38,6 +39,7 @@ public class PaintingPane extends StackPane {
         autograph = new Text("Pepijn Emmers");
 
         HBox autographPane = new HBox();
+        autographPane.setMouseTransparent(true);
         autographPane.setAlignment(Pos.BOTTOM_RIGHT);
         autographPane.setPadding(new Insets(15));
         autographPane.getChildren().add(autograph);
@@ -61,7 +63,7 @@ public class PaintingPane extends StackPane {
         // draw trees
         for (Tree tree : world.getTrees()) {
             TreePainter painter = tree.getType() == TreeType.LEAF ? new LeafTreePainter() : new PineTreePainter();
-            content.getChildren().add(painter.paint(tree, getWidth(), getHeight()));
+            content.getChildren().add(painter.paint(tree, this));
         }
     }
 }
