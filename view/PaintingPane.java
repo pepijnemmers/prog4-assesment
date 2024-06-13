@@ -14,10 +14,13 @@ import model.TreeType;
 import model.World;
 
 public class PaintingPane extends StackPane {
-    private World world;
+    private final Controller controller;
+    private final Pane content;
     public final Text autograph;
 
     public PaintingPane(Controller controller) {
+        this.controller = controller;
+
         // draw background
         Pane sky = new Pane();
         sky.setStyle("-fx-background-color: #87CEEB;");
@@ -30,7 +33,7 @@ public class PaintingPane extends StackPane {
         VBox.setVgrow(ground, Priority.ALWAYS);
         background.getChildren().addAll(sky, ground);
 
-        Pane content = new Pane();
+        content = new Pane();
 
         // autograph
         autograph = new Text("Pepijn Emmers");
@@ -42,17 +45,21 @@ public class PaintingPane extends StackPane {
 
         getChildren().addAll(background, content, autographPane);
 
-        World world = new World();
-        world.addTree(new Tree(TreeSize.XXL, TreeType.LEAF, 30, 75));
-        world.addTree(new Tree(TreeSize.M, TreeType.LEAF, 80, 75));
-        world.addTree(new Tree(TreeSize.XL, TreeType.LEAF, 80, 75));
-        world.addTree(new Tree(TreeSize.L, TreeType.PINE, 50, 75));
+        Platform.runLater(this::refresh);
+    }
 
-        Platform.runLater(() -> {
-            for (Tree tree : world.getTrees()) {
-                TreePainter painter = tree.getType() == TreeType.LEAF ? new LeafTreePainter() : new PineTreePainter();
-                content.getChildren().add(painter.paint(tree, getWidth(), getHeight()));
-            }
-        });
+    public void refresh() {
+        // clear pane
+        content.getChildren().clear();
+
+        // get world from controller
+        World world = controller.getWorld();
+
+        // draw trees
+        if (world == null) return;
+        for (Tree tree : world.getTrees()) {
+            TreePainter painter = tree.getType() == TreeType.LEAF ? new LeafTreePainter() : new PineTreePainter();
+            content.getChildren().add(painter.paint(tree, getWidth(), getHeight()));
+        }
     }
 }
