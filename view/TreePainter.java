@@ -82,10 +82,12 @@ abstract class TreePainter {
 
         // move the tree (in the model) when the mouse is released
         paneWithTree.setOnMouseReleased(event -> {
-            double newX = paneWithTree.getLayoutX() + paneWithTree.getBoundsInParent().getWidth() / 2;
-            double newY = paneWithTree.getLayoutY() + paneWithTree.getBoundsInParent().getHeight() / 2;
+            double newX = paneWithTree.getLayoutX() + event.getX() - offsetX[0] + paneWithTree.getBoundsInLocal().getWidth();
+            double newY = paneWithTree.getLayoutY() + event.getY() - offsetY[0] + (paneWithTree.getBoundsInLocal().getHeight() / 2);
             double relX = newX / paintingWidth * 100;
             double relY = newY / paintingHeight * 100;
+
+            // prevent the tree from flying in air
             if (relY < 50) relY = 50;
 
             tree.move(relX, relY);
