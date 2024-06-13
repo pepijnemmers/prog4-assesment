@@ -42,7 +42,7 @@ public class PaintingScene extends Scene {
         loadMI.setOnAction(e -> controller.loadWorld());
 
         MenuItem saveMI = new MenuItem("Save painting as...");
-        saveMI.setOnAction(e -> System.out.println("Save painting as...")); // TODO
+        saveMI.setOnAction(e -> controller.saveWorld());
 
         MenuItem exitMI = new MenuItem("Exit");
         exitMI.setOnAction(e -> System.exit(0));

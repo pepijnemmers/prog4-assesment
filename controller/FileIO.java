@@ -5,9 +5,8 @@ import model.TreeSize;
 import model.TreeType;
 import model.World;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
+import java.util.List;
 
 public class FileIO {
 
@@ -19,7 +18,6 @@ public class FileIO {
 
             while ((line = br.readLine()) != null) {
                 String[] data = line.split(":");
-
                 if (data.length != 4) continue;
 
                 TreeType type = TreeType.valueOf(data[0].toUpperCase());
@@ -34,5 +32,23 @@ public class FileIO {
         }
 
         return world;
+    }
+
+    public static void write(String filePath, World world) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(filePath))) {
+            List<Tree> trees = world.getTrees();
+
+            for (Tree tree : trees) {
+                String type = tree.getType().toString().toLowerCase();
+                String size = tree.getSize().toString();
+                int relX = (int) tree.getRelX();
+                int relY = (int) tree.getRelY();
+
+                String line = type + ":" + size + ":" + relX + ":" + relY;
+                bw.write(line);
+                bw.newLine();
+            }
+        } catch (IOException ignored) {
+        }
     }
 }

@@ -18,6 +18,7 @@ import java.util.Random;
 public class Controller extends Application {
     private static final int FONT_SIZE = 24;
     private static final Random RANDOM = new Random();
+    private static final String BASIC_FOLDER = "resources/paintings";
 
     private Stage stage;
     private PaintingScene paintingScene;
@@ -134,6 +135,21 @@ public class Controller extends Application {
         if (selectedFile != null) {
             world = FileIO.read(selectedFile.getAbsolutePath());
             paintingScene.paintingPane.refresh();
+        }
+    }
+
+    public void saveWorld() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Painting Files", "*.painting"));
+
+        File startFolder = new File(BASIC_FOLDER);
+        if (startFolder.exists() && startFolder.isDirectory()) {
+            fileChooser.setInitialDirectory(startFolder);
+        }
+
+        File selectedFile = fileChooser.showSaveDialog(new Stage());
+        if (selectedFile != null) {
+            FileIO.write(selectedFile.getAbsolutePath(), world);
         }
     }
 }
