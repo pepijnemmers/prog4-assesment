@@ -15,7 +15,7 @@ import java.util.Comparator;
 
 public class PaintingPane extends StackPane {
     private final Controller controller;
-    private final Pane content;
+    public final Pane content;
     public final Text autograph;
 
     public PaintingPane(Controller controller) {

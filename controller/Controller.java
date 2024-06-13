@@ -162,10 +162,14 @@ public class Controller extends Application {
 
     public void toggleMovie() {
         playMovie = !playMovie;
+
+        // start/stop movie and disable/enable drag and drop
         if (playMovie) {
             startAnimation();
+            paintingScene.paintingPane.content.setMouseTransparent(true);
         } else {
             stopAnimation();
+            paintingScene.paintingPane.content.setMouseTransparent(false);
         }
     }
 
