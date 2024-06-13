@@ -18,7 +18,6 @@ public class Controller extends Application {
     private static final int FONT_SIZE = 24;
     private static final Random RANDOM = new Random();
     private static final String BASIC_FOLDER = "resources/paintings";
-    private static final double MOVIE_SPEED = 100;
 
     private Stage stage;
     private PaintingScene paintingScene;

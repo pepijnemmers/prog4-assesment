@@ -55,11 +55,10 @@ public class PaintingPane extends StackPane {
         World world = controller.getWorld();
         if (world == null) return;
 
-        // order trees by y-coordinate
+        // sort trees by y-coordinate
         world.getTrees().sort(Comparator.comparingDouble(Tree::getRelY));
 
         // draw trees
-        // TODO: bomen niet buiten scherm, schalen van grootte
         for (Tree tree : world.getTrees()) {
             TreePainter painter = tree.getType() == TreeType.LEAF ? new LeafTreePainter() : new PineTreePainter();
             content.getChildren().add(painter.paint(tree, getWidth(), getHeight()));

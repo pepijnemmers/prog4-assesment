@@ -10,6 +10,11 @@ import java.util.List;
 
 public class FileIO {
 
+    /**
+     * Reads a painting from a file and returns a World object.
+     * @param filePath The path to the file.
+     * @return a World model object.
+     */
     public static World read(String filePath) {
         World world = new World();
 
@@ -34,6 +39,11 @@ public class FileIO {
         return world;
     }
 
+    /**
+     * Writes a World object to a file.
+     * @param filePath The path to the file.
+     * @param world The World object to write.
+     */
     public static void write(String filePath, World world) {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(filePath))) {
             List<Tree> trees = world.getTrees();
