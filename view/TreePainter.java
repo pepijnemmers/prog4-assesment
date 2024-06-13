@@ -1,5 +1,6 @@
 package view;
 
+import javafx.scene.Cursor;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -78,10 +79,13 @@ abstract class TreePainter {
         final double[] offsetX = new double[1];
         final double[] offsetY = new double[1];
 
+        paneWithTree.setOnMouseEntered(e -> paneWithTree.setCursor(Cursor.OPEN_HAND));
+
         // set the offset when the mouse is pressed (offset = mouse position - tree position)
         paneWithTree.setOnMousePressed(event -> {
             offsetX[0] = event.getSceneX() - paneWithTree.getLayoutX();
             offsetY[0] = event.getSceneY() - paneWithTree.getLayoutY();
+            paneWithTree.setCursor(Cursor.CLOSED_HAND);
         });
 
         // move the tree when the mouse is dragged
