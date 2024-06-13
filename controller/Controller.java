@@ -1,7 +1,6 @@
 package controller;
 
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.scene.image.Image;
 import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
@@ -130,6 +129,11 @@ public class Controller extends Application {
     public void loadWorld() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Painting Files", "*.painting"));
+
+        File startFolder = new File(BASIC_FOLDER);
+        if (startFolder.exists() && startFolder.isDirectory()) {
+            fileChooser.setInitialDirectory(startFolder);
+        }
 
         File selectedFile = fileChooser.showOpenDialog(stage);
         if (selectedFile != null) {
