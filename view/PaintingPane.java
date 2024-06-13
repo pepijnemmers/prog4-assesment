@@ -13,6 +13,8 @@ import model.TreeSize;
 import model.TreeType;
 import model.World;
 
+import java.util.Comparator;
+
 public class PaintingPane extends StackPane {
     private final Controller controller;
     private final Pane content;
@@ -54,10 +56,13 @@ public class PaintingPane extends StackPane {
 
         // get world from controller
         World world = controller.getWorld();
+        if (world == null) return;
+
+        // order trees by y-coordinate
+        world.getTrees().sort(Comparator.comparingDouble(Tree::getRelY));
 
         // draw trees
-        if (world == null) return;
-        // TODO: bomen niet buiten scherm, voorste bomen voorop en achterste bomen achterop, schalen van grootte
+        // TODO: bomen niet buiten scherm, schalen van grootte
         for (Tree tree : world.getTrees()) {
             TreePainter painter = tree.getType() == TreeType.LEAF ? new LeafTreePainter() : new PineTreePainter();
             content.getChildren().add(painter.paint(tree, getWidth(), getHeight()));

@@ -1,8 +1,10 @@
 package controller;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.image.Image;
 import javafx.scene.text.Font;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import model.Tree;
 import model.TreeSize;
@@ -10,27 +12,34 @@ import model.TreeType;
 import model.World;
 import view.PaintingScene;
 
+import java.io.File;
 import java.util.Random;
 
 public class Controller extends Application {
     private static final int FONT_SIZE = 24;
     private static final Random RANDOM = new Random();
 
+    private Stage stage;
     private PaintingScene paintingScene;
-    private final World world = new World();
+    private World world;
 
     public static void startup(String[] args) {
         launch(args);
     }
 
     @Override
-    public void start(Stage stage) {
+    public void start(Stage primaryStage) {
+        stage = primaryStage;
+
         // stage settings
         stage = new Stage();
         stage.setTitle("Pepijn Emmers - Painting");
         stage.getIcons().add(new Image("/resources/pics/favicon.jpg"));
         stage.setWidth(800);
         stage.setHeight(600);
+
+        // set world
+        world = new World();
 
         // show stage
         paintingScene = new PaintingScene(this);
@@ -115,5 +124,16 @@ public class Controller extends Application {
     public void clearAllTrees() {
         world.clearTrees();
         paintingScene.paintingPane.refresh();
+    }
+
+    public void loadWorld() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Painting Files", "*.painting"));
+
+        File selectedFile = fileChooser.showOpenDialog(stage);
+        if (selectedFile != null) {
+            world = FileIO.read(selectedFile.getAbsolutePath());
+            paintingScene.paintingPane.refresh();
+        }
     }
 }

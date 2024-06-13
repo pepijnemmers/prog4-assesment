@@ -2,6 +2,7 @@ package view;
 
 import com.sun.xml.internal.bind.v2.TODO;
 import controller.Controller;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
@@ -22,6 +23,14 @@ public class PaintingScene extends Scene {
         root.setCenter(paintingPane);
 
         setRoot(root);
+
+        // on resize listener
+        widthProperty().addListener((observable, oldValue, newValue) -> {
+            Platform.runLater(paintingPane::refresh);
+        });
+        heightProperty().addListener((observable, oldValue, newValue) -> {
+            Platform.runLater(paintingPane::refresh);
+        });
     }
 
     private MenuBar createMenuBar() {
@@ -30,7 +39,7 @@ public class PaintingScene extends Scene {
         // file
         Menu fileMenu = new Menu("File");
         MenuItem loadMI = new MenuItem("Load painting...");
-        loadMI.setOnAction(e -> System.out.println("Load painting...")); // TODO
+        loadMI.setOnAction(e -> controller.loadWorld());
 
         MenuItem saveMI = new MenuItem("Save painting as...");
         saveMI.setOnAction(e -> System.out.println("Save painting as...")); // TODO
