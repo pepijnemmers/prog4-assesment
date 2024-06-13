@@ -13,6 +13,12 @@ abstract class TreePainter {
 
     private PaintingPane paintingPane = null;
 
+    /**
+     * Paint the tree.
+     * @param tree the tree to paint
+     * @param paintingPane the painting pane
+     * @return the pane with the tree
+     */
     public Pane paint(Tree tree, PaintingPane paintingPane) {
         this.paintingPane = paintingPane;
         double paintingWidth = paintingPane.getWidth();
@@ -41,7 +47,7 @@ abstract class TreePainter {
         Pane paneWithTree = new Pane(treeTop, trunk);
 
         // scale the tree
-        double scale = tree.getSize().getScale() / 100;
+        double scale = (tree.getSize().getScale() / 100) * (0.02 * tree.getRelY() - 0.8);
         paneWithTree.setScaleX(scale);
         paneWithTree.setScaleY(scale);
 
@@ -59,6 +65,12 @@ abstract class TreePainter {
         return paneWithTree;
     }
 
+    /**
+     * Draw the tree top.
+     *
+     * @param tree the tree to draw
+     * @return the tree top
+     */
     protected abstract Shape drawTreeTop(Tree tree);
 
     private void setDragAndDrop(Pane paneWithTree, Tree tree, double paintingWidth, double paintingHeight) {
