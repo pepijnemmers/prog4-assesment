@@ -61,32 +61,32 @@ public class PaintingScene extends Scene {
 
         RadioMenuItem greatVibesMI = new RadioMenuItem("Great Vibes");
         greatVibesMI.setToggleGroup(autographGroup);
+        greatVibesMI.setOnAction(e -> controller.changeAutographFont("GreatVibes"));
         greatVibesMI.setSelected(true);
-        greatVibesMI.setOnAction(e -> System.out.println("Great Vibes")); // TODO
 
         RadioMenuItem handdnaMI = new RadioMenuItem("Handwriting DNA");
         handdnaMI.setToggleGroup(autographGroup);
-        handdnaMI.setOnAction(e -> System.out.println("Handwriting DNA")); // TODO
+        handdnaMI.setOnAction(e -> controller.changeAutographFont("handdna"));
 
         RadioMenuItem homemadeAppleMI = new RadioMenuItem("Homemade Apple");
         homemadeAppleMI.setToggleGroup(autographGroup);
-        homemadeAppleMI.setOnAction(e -> System.out.println("Homemade Apple")); // TODO
+        homemadeAppleMI.setOnAction(e -> controller.changeAutographFont("HomemadeApple"));
 
         RadioMenuItem leckerliOneMI = new RadioMenuItem("Leckerli One");
         leckerliOneMI.setToggleGroup(autographGroup);
-        leckerliOneMI.setOnAction(e -> System.out.println("Leckerli One")); // TODO
+        leckerliOneMI.setOnAction(e -> controller.changeAutographFont("LeckerliOne"));
 
         RadioMenuItem pwSignatureMI = new RadioMenuItem("PW Signature");
         pwSignatureMI.setToggleGroup(autographGroup);
-        pwSignatureMI.setOnAction(e -> System.out.println("PW Signature")); // TODO
+        pwSignatureMI.setOnAction(e -> controller.changeAutographFont("PWSignatureTwo"));
 
         RadioMenuItem quickhandMI = new RadioMenuItem("Quickhand");
         quickhandMI.setToggleGroup(autographGroup);
-        quickhandMI.setOnAction(e -> System.out.println("Quickhand")); // TODO
+        quickhandMI.setOnAction(e -> controller.changeAutographFont("Quikhand"));
 
         RadioMenuItem tommysMI = new RadioMenuItem("Tommys");
         tommysMI.setToggleGroup(autographGroup);
-        tommysMI.setOnAction(e -> System.out.println("Tommys")); // TODO
+        tommysMI.setOnAction(e -> controller.changeAutographFont("tommys"));
 
         autographMenu.getItems().addAll(greatVibesMI, handdnaMI, homemadeAppleMI, leckerliOneMI, pwSignatureMI, quickhandMI, tommysMI);
 

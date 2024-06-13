@@ -4,12 +4,10 @@ import controller.Controller;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.Label;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
-import javafx.scene.text.TextAlignment;
 import model.Tree;
 import model.TreeSize;
 import model.TreeType;
@@ -17,7 +15,7 @@ import model.World;
 
 public class PaintingPane extends StackPane {
     private World world;
-    private final Text autograph;
+    public final Text autograph;
 
     public PaintingPane(Controller controller) {
         // draw background
@@ -36,7 +34,6 @@ public class PaintingPane extends StackPane {
 
         // autograph
         autograph = new Text("Pepijn Emmers");
-        controller.changeAutographFont("GreatVibes");
 
         HBox autographPane = new HBox();
         autographPane.setAlignment(Pos.BOTTOM_RIGHT);
@@ -57,11 +54,5 @@ public class PaintingPane extends StackPane {
                 content.getChildren().add(painter.paint(tree, getWidth(), getHeight()));
             }
         });
-    }
-
-    public void changeAutographFont(Font font) {
-        getChildren().remove(autograph);
-        autograph.setFont(font);
-        getChildren().add(autograph);
     }
 }
