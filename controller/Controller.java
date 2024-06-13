@@ -1,6 +1,5 @@
 package controller;
 
-import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.image.Image;
 import javafx.scene.text.Font;
@@ -25,6 +24,7 @@ public class Controller extends Application {
     private PaintingScene paintingScene;
     private World world;
     private boolean playMovie;
+    private AnimationThread animationThread;
 
     public static void startup(String[] args) {
         launch(args);
@@ -50,9 +50,6 @@ public class Controller extends Application {
         changeAutographFont("GreatVibes");
         stage.setScene(paintingScene);
         stage.show();
-
-        // Start animation thread
-        startAnimation();
     }
 
     public void changeAutographFont(String fontName) {
@@ -166,28 +163,23 @@ public class Controller extends Application {
 
     public void toggleMovie() {
         playMovie = !playMovie;
+        if (playMovie) {
+            startAnimation();
+        } else {
+            stopAnimation();
+        }
     }
 
     private void startAnimation() {
-        AnimationTimer animationTimer = new AnimationTimer() {
-            long lastUpdate = 0;
-
-            @Override
-            public void handle(long now) {
-                double deltaTime = (now - lastUpdate) / 1e9;
-                if (deltaTime > 1.0 / 24.0) {
-                    moveTrees(deltaTime * MOVIE_SPEED);
-                    paintingScene.paintingPane.refresh();
-                    lastUpdate = now;
-                }
-            }
-        };
-        animationTimer.start();
+        if (animationThread == null || !animationThread.isAlive()) {
+            animationThread = new AnimationThread(paintingScene.paintingPane, this);
+            animationThread.start();
+        }
     }
 
-    private void moveTrees(double speed) {
-        if (playMovie) {
-            world.moveTrees(speed);
+    private void stopAnimation() {
+        if (animationThread != null) {
+            animationThread.stopThread();
         }
     }
 }
