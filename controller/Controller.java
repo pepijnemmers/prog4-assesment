@@ -5,6 +5,7 @@ import javafx.scene.image.Image;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import view.PaintingScene;
+// TODO update imports everywhere (auto cleanup)
 
 public class Controller extends Application {
     private PaintingScene paintingScene;
