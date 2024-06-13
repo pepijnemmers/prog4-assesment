@@ -57,6 +57,7 @@ public class PaintingPane extends StackPane {
 
         // draw trees
         if (world == null) return;
+        // TODO: bomen niet buiten scherm, voorste bomen voorop en achterste bomen achterop, schalen van grootte
         for (Tree tree : world.getTrees()) {
             TreePainter painter = tree.getType() == TreeType.LEAF ? new LeafTreePainter() : new PineTreePainter();
             content.getChildren().add(painter.paint(tree, getWidth(), getHeight()));

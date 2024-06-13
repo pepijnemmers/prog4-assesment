@@ -102,4 +102,18 @@ public class Controller extends Application {
         paintingScene.paintingPane.refresh();
     }
 
+    public void addHundredTrees() {
+        for (int i = 0; i < 100; i++) {
+            if (RANDOM.nextBoolean()) {
+                addLeafTree();
+            } else {
+                addPineTree();
+            }
+        }
+    }
+
+    public void clearAllTrees() {
+        world.clearTrees();
+        paintingScene.paintingPane.refresh();
+    }
 }

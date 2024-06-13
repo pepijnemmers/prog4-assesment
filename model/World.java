@@ -17,6 +17,10 @@ public class World {
         trees.add(tree);
     }
 
+    public void clearTrees() {
+        trees.clear();
+    }
+
     public void moveTrees() {
 
     }

@@ -1,5 +1,6 @@
 package view;
 
+import com.sun.xml.internal.bind.v2.TODO;
 import controller.Controller;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -45,13 +46,13 @@ public class PaintingScene extends Scene {
         addLeafMI.setOnAction(e -> controller.addLeafTree());
 
         MenuItem addPineMI = new MenuItem("Add Pine Tree");
-        addPineMI.setOnAction(e -> System.out.println("Add Pine Tree")); // TODO
+        addPineMI.setOnAction(e -> controller.addPineTree());
 
         MenuItem addHundredMI = new MenuItem("Add 100 Trees");
-        addHundredMI.setOnAction(e -> System.out.println("Add 100 Trees")); // TODO
+        addHundredMI.setOnAction(e -> controller.addHundredTrees());
 
         MenuItem clearMI = new MenuItem("Clear All Trees");
-        clearMI.setOnAction(e -> System.out.println("Clear All Trees")); // TODO
+        clearMI.setOnAction(e -> controller.clearAllTrees());
 
         treeMenu.getItems().addAll(addLeafMI, addPineMI, addHundredMI, clearMI);
 
