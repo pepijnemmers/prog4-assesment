@@ -5,8 +5,8 @@ import model.World;
 import view.PaintingPane;
 
 public class AnimationThread extends Thread {
-    private static final double FRAME_RATE = 45;
-    private static final double SPEED = 0.8;
+    private static final double FRAME_RATE = 24;
+    private static final double SPEED = 1;
 
     private final PaintingPane paintingPane;
     private final Controller controller;

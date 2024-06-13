@@ -1,6 +1,5 @@
 package view;
 
-import com.sun.xml.internal.bind.v2.TODO;
 import controller.Controller;
 import javafx.application.Platform;
 import javafx.scene.Scene;
