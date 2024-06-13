@@ -103,7 +103,7 @@ public class PaintingScene extends Scene {
         // movie
         Menu movieMenu = new Menu("Movie");
         CheckMenuItem playMI = new CheckMenuItem("Play");
-        playMI.setOnAction(e -> System.out.println("Play")); // TODO
+        playMI.setOnAction(e -> controller.toggleMovie());
         movieMenu.getItems().add(playMI);
 
         // add to menu bar

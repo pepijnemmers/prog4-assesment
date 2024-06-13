@@ -4,12 +4,9 @@ import controller.Controller;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.Label;
 import javafx.scene.layout.*;
-import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import model.Tree;
-import model.TreeSize;
 import model.TreeType;
 import model.World;
 

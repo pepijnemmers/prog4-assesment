@@ -1,10 +1,10 @@
 package model;
 
 public class Tree {
-    private TreeSize size;
-    private TreeType type;
+    private final TreeSize size;
+    private final TreeType type;
     private double relX;
-    private double relY;
+    private final double relY;
 
     public Tree(TreeSize size, TreeType type, double relX, double relY) {
         this.size = size;
@@ -29,7 +29,7 @@ public class Tree {
         return relY;
     }
 
-    public void move() {
-
+    public void move(double x) {
+        relX = x;
     }
 }

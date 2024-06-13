@@ -3,7 +3,7 @@ package model;
 import java.util.ArrayList;
 
 public class World {
-    private ArrayList<Tree> trees;
+    private final ArrayList<Tree> trees;
 
     public World() {
         trees = new ArrayList<Tree>();
@@ -21,7 +21,15 @@ public class World {
         trees.clear();
     }
 
-    public void moveTrees() {
+    public void moveTrees(double speed) {
+        for (Tree tree : trees) {
+            double moveFactor = 0.1 * (1 - tree.getRelY() / 100);
+            double moveDistance = speed * moveFactor;
 
+            tree.move(tree.getRelX() + moveDistance);
+            if (tree.getRelX() > 110) {
+                tree.move(-5);
+            }
+        }
     }
 }
