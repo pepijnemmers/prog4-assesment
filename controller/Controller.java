@@ -4,13 +4,20 @@ import javafx.application.Application;
 import javafx.scene.image.Image;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import model.Tree;
+import model.TreeSize;
+import model.TreeType;
+import model.World;
 import view.PaintingScene;
-// TODO update imports everywhere (auto cleanup)
+
+import java.util.Random;
 
 public class Controller extends Application {
-    private PaintingScene paintingScene;
-
     private static final int FONT_SIZE = 24;
+    private static final Random RANDOM = new Random();
+
+    private PaintingScene paintingScene;
+    private final World world = new World();
 
     public static void startup(String[] args) {
         launch(args);
@@ -39,7 +46,6 @@ public class Controller extends Application {
         }
     }
 
-
     private Font getFont(String fontName) {
         String fontPath = "/resources/fonts/";
         switch (fontName) {
@@ -66,6 +72,34 @@ public class Controller extends Application {
                 break;
         }
         return Font.loadFont(getClass().getResourceAsStream(fontPath), FONT_SIZE);
+    }
+
+    public World getWorld() {
+        return world;
+    }
+
+    public TreeSize getRandomTreeSize() {
+        return TreeSize.values()[(int) (Math.random() * TreeSize.values().length)];
+    }
+
+    public double getRandomRelY() {
+        return 50 + RANDOM.nextInt(51); // 50 - 100 (is exclusive upper bound)
+    }
+
+    public double getRandomRelX() {
+        return RANDOM.nextInt(101); // 0 - 100 (is exclusive upper bound)
+    }
+
+    public void addLeafTree() {
+        Tree tree = new Tree(getRandomTreeSize(), TreeType.LEAF, getRandomRelX(), getRandomRelY());
+        world.addTree(tree);
+        paintingScene.paintingPane.refresh();
+    }
+
+    public void addPineTree() {
+        Tree tree = new Tree(getRandomTreeSize(), TreeType.PINE, getRandomRelX(), getRandomRelY());
+        world.addTree(tree);
+        paintingScene.paintingPane.refresh();
     }
 
 }

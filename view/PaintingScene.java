@@ -42,7 +42,7 @@ public class PaintingScene extends Scene {
         // tree
         Menu treeMenu = new Menu("Tree");
         MenuItem addLeafMI = new MenuItem("Add Leaf Tree");
-        addLeafMI.setOnAction(e -> System.out.println("Add Leaf Tree")); // TODO
+        addLeafMI.setOnAction(e -> controller.addLeafTree());
 
         MenuItem addPineMI = new MenuItem("Add Pine Tree");
         addPineMI.setOnAction(e -> System.out.println("Add Pine Tree")); // TODO

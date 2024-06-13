@@ -50,5 +50,5 @@ abstract class TreePainter {
         return paneWithTree;
     }
 
-    protected abstract Pane drawTree();
+    protected abstract Shape drawTreeTop(Tree tree);
 }
