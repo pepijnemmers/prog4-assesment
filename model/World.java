@@ -23,12 +23,12 @@ public class World {
 
     public void moveTrees(double speed) {
         for (Tree tree : trees) {
-            double moveFactor = 0.1 * (1 - tree.getRelY() / 100);
+            double moveFactor = 0.1 * (0.8 + (tree.getRelY() / 100));
             double moveDistance = speed * moveFactor;
 
             tree.move(tree.getRelX() + moveDistance);
             if (tree.getRelX() > 110) {
-                tree.move(-5);
+                tree.move(-10);
             }
         }
     }

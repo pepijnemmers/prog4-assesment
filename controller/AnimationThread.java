@@ -5,8 +5,8 @@ import model.World;
 import view.PaintingPane;
 
 public class AnimationThread extends Thread {
-    private static final int FRAME_RATE = 24;
-    private static final double SPEED = 5;
+    private static final double FRAME_RATE = 45;
+    private static final double SPEED = 0.8;
 
     private final PaintingPane paintingPane;
     private final Controller controller;
@@ -29,7 +29,7 @@ public class AnimationThread extends Thread {
             });
 
             try {
-                Thread.sleep(1000 / FRAME_RATE);
+                Thread.sleep((long) (1000 / FRAME_RATE));
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
             }
